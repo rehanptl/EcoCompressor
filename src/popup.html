@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+    <title>Eco Prompt Compressor</title>
+</head>
+<body>
+    <div class="popup-container">
+        <h1>🌱 Eco Compressor</h1>
+        
+        <div class="toggle-section">
+            <label>
+                <input type="checkbox" id="ecoModeToggle">
+                Enable Eco Mode
+            </label>
+        </div>
+        
+        <div class="button-section">
+            <button id="compressButton">✨ Compress Text</button>
+        </div>
+
+        <div id="statsArea">
+            <h2>📊 Statistics</h2>
+            <p><span class="stat-label">Tokens Before:</span> <span class="stat-value" id="tokensBefore">-</span></p>
+            <p><span class="stat-label">Tokens After:</span> <span class="stat-value" id="tokensAfter">-</span></p>
+            <p><span class="stat-label">Tokens Saved:</span> <span class="stat-value" id="tokensSaved">-</span></p>
+            <p><span class="stat-label">Savings:</span> <span class="stat-value" id="tokensSavedPercentage">-</span></p>
+            <p><span class="stat-label">⚡ Energy (Wh):</span> <span class="stat-value" id="energySaved">-</span></p>
+            <p><span class="stat-label">💧 Water (mL):</span> <span class="stat-value" id="waterSaved">-</span></p>
+        </div>
+
+        <div id="textPreview">
+            <h2>📝 Preview</h2>
+            <div>
+                <strong>Before:</strong>
+                <div class="preview-box" id="previewBefore">Focus on a text field and click compress</div>
+            </div>
+            <div>
+                <strong>After:</strong>
+                <div class="preview-box" id="previewAfter">Compressed result will appear here</div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

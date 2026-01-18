@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Compressor Settings</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 16px;
+            color: #333;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: monospace;
+            transition: border-color 0.3s;
+        }
+
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: #999;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .help-text a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            margin-right: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .api-status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .api-status.configured {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .api-status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Eco Compressor Settings</h1>
+
+        <div class="settings-section">
+            <h2>🔑 Gemini API Key</h2>
+            <p>Enable intelligent text compression using Google's Gemini API.</p>
+            
+            <label for="apiKey">API Key (kept hidden & secure):</label>
+            <input type="password" id="apiKey" placeholder="Enter your Gemini API key here...">
+            
+            <div class="help-text">
+                Get a free API key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                <br>Your API key is stored locally and never sent anywhere except to Google's Gemini API.
+            </div>
+
+            <div id="apiStatus" class="api-status"></div>
+
+            <div class="button-group">
+                <button id="saveButton">💾 Save Settings</button>
+                <button id="testButton">🧪 Test API</button>
+                <button id="clearButton" style="background: #f44336; box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);">✕ Clear</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>ℹ️ About</h2>
+            <p style="margin: 0; font-size: 14px; color: #666; line-height: 1.6;">
+                Eco Compressor helps reduce token usage by intelligently rewriting prompts to be more concise. 
+                With Gemini API enabled, it uses AI to maintain meaning while reducing length.
+                <br><br>
+                Without API key: Uses regex-based compression (faster, no costs)
+                <br>
+                With API key: Uses Gemini for intelligent compression (better results)
+            </p>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>
