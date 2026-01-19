@@ -2,7 +2,7 @@
 console.log('Eco Compressor: Service Worker Loaded');
 
 // 🟢 PASTE YOUR FRESH KEY HERE
-const API_KEY = "AIzaSyAPwNKL3RlFUc1fMsR3xGODd1rhWJSwunc"; 
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'compressWithGemini') {
