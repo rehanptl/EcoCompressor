@@ -1,1 +1,1 @@
-const CONFIG = { API_KEY: "AIzaSyAPwNKL3RlFUc1fMsR3xGODd1rhWJSwunc" };
+const CONFIG = { API_KEY: "PASTE_YOUR_KEY_HERE" };
