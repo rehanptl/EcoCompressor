@@ -1,16 +1,20 @@
-# Eco Prompt Compressor
+🍃 Eco Prompt Compressor
 
-## Overview
-The Eco Prompt Compressor is a Chrome extension designed to help users compress their text input in editable fields while promoting eco-friendly practices. By reducing the number of tokens used in text, the extension estimates the energy and water savings associated with the reduction.
+🌍 Overview
 
-## Features
-- **Eco Mode Toggle**: Easily switch Eco Mode on or off to enable or disable text compression.
-- **Text Compression**: Automatically compresses text in focused editable elements when Eco Mode is enabled.
-- **Token Estimation**: Provides estimates of tokens before and after compression, along with the percentage of tokens saved.
-- **Eco Impact Estimates**: Displays rough estimates of energy and water saved based on the number of tokens saved.
+Eco Prompt Compressor is a smart Chrome extension designed to shrink your AI prompts and your carbon footprint. By using AI to strip away redundant tokens, we help users save significant amounts of energy and water used by data centers with every request.
 
-## File Structure
-```
+✨ Features
+
+- 🔋 Eco Mode Toggle: Quickly switch compression on or off whenever you need it.
+  
+- 🤖 AI-Powered Compression: Uses Google Gemini 1.5 Flash to remove filler phrases while keeping 100% of your prompt's meaning.
+  
+- 📊 Token Analytics: See exactly how many tokens you saved and the percentage of efficiency gained.
+  
+- 💧 Eco-Impact Tracking: Real-time estimates of energy ($0.001$ kWh) and water ($0.5$ ml) saved per token reduction.
+
+📂 File Structure
 eco-prompt-compressor
 ├── src
 │   ├── manifest.json
@@ -19,25 +23,41 @@ eco-prompt-compressor
 │   ├── popup.js
 │   ├── content-script.js
 │   ├── service-worker.js
+│   ├── config.example.js
+│   ├── config.js (User Created) 🔑
 │   └── utils.js
 └── README.md
-```
 
-## How to Load Unpacked Extension
-1. Open Chrome and navigate to `chrome://extensions/`.
-2. Enable "Developer mode" using the toggle in the top right corner.
-3. Click on "Load unpacked" and select the `eco-prompt-compressor/src` directory.
-4. The extension should now be loaded and ready for use.
+🚀 Installation 
+Follow these exact commands in your terminal to get started:
+1. git clone https://github.com/rehanptl/EcoCompressor.git
+2. cd EcoCompressor/src
+3. cp config.example.js config.js
+4. open -e config.js
+5. Load in Chrome: 🌐
+- Open chrome://extensions/
+- Enable Developer mode (toggle in the top right).
+- Click Load unpacked (top left).
+- Select the src folder inside the EcoCompressor directory.
 
-## How It Works
-- The extension injects a content script into web pages that detects focused editable elements (like textareas and contenteditable divs).
-- When Eco Mode is enabled, pressing Enter or clicking the "Compress current text" button will trigger the compression of the text.
-- The compression process uses deterministic heuristics to remove filler phrases, redundant whitespace, and verbose patterns while preserving important formatting and code blocks.
-- The popup UI displays token estimates and eco impact statistics based on the compression results.
+🛠️ How It Works
+Selection: Highlight any text on a page and right-click to "Optimize Selection."
 
-## Limitations and Safety Notes
-- The token estimation is a rough heuristic and may not reflect the exact number of tokens used in different contexts.
-- The compression rules are designed to be easily extendable, allowing for future improvements and adjustments.
-- The extension does not rely on any external APIs or paid services, ensuring user privacy and data security.
+Processing: Our service worker sends the text to Gemini to be compressed into a "Green Prompt."
 
-Feel free to contribute to the project or suggest improvements!
+Results: The popup displays your savings in milliliters of water and watts of energy, making the invisible cost of AI visible.
+
+⚠️ Safety & Notes
+Privacy: Your API key is stored locally in config.js and is never uploaded to GitHub.
+
+Heuristics: Token savings are calculated based on standard LLM average costs.
+
+
+
+
+
+
+
+
+
+
