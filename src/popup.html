@@ -1,48 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="popup.css">
-    <title>Eco Prompt Compressor</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 340px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ecfdf5; /* Mint background */
+      padding: 15px;
+      color: #064e3b;
+    }
+
+    /* Header */
+    h2 {
+      text-align: center;
+      color: #047857;
+      margin: 5px 0 2px 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #059669;
+      font-size: 11px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Hero Button */
+    button {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(16, 185, 129, 0.5);
+    }
+
+    button:active { transform: scale(0.98); }
+
+    /* Status Message */
+    #status {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 12px;
+      color: #6ee7b7;
+      font-weight: 600;
+      min-height: 18px;
+    }
+
+    /* The 2x2 Grid */
+    .stats-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      display: none; /* Hidden until compression */
+    }
+
+    .stat-card {
+      background: white;
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #d1fae5;
+    }
+
+    .stat-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+    .stat-value { font-weight: 800; font-size: 20px; color: #065f46; display: block; }
+    .stat-label { font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* The New "Words Removed" Center Stat */
+    .total-words-container {
+      margin-top: 20px;
+      text-align: center;
+      display: none; /* Hidden until compression */
+    }
+
+    .total-words-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .words-val { font-size: 24px; font-weight: 800; color: #047857; }
+    .words-lbl { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; text-align: left; line-height: 1.2; }
+
+    /* Footer Badge */
+    .hackathon-badge {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 9px;
+      color: #10b981;
+      opacity: 0.8;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
-    <div class="popup-container">
-        <h1>🌱 Eco Compressor</h1>
-        
-        <div class="toggle-section">
-            <label>
-                <input type="checkbox" id="ecoModeToggle">
-                Enable Eco Mode
-            </label>
-        </div>
-        
-        <div class="button-section">
-            <button id="compressButton">✨ Compress Text</button>
-        </div>
 
-        <div id="statsArea">
-            <h2>📊 Statistics</h2>
-            <p><span class="stat-label">Tokens Before:</span> <span class="stat-value" id="tokensBefore">-</span></p>
-            <p><span class="stat-label">Tokens After:</span> <span class="stat-value" id="tokensAfter">-</span></p>
-            <p><span class="stat-label">Tokens Saved:</span> <span class="stat-value" id="tokensSaved">-</span></p>
-            <p><span class="stat-label">Savings:</span> <span class="stat-value" id="tokensSavedPercentage">-</span></p>
-            <p><span class="stat-label">⚡ Energy (Wh):</span> <span class="stat-value" id="energySaved">-</span></p>
-            <p><span class="stat-label">💧 Water (mL):</span> <span class="stat-value" id="waterSaved">-</span></p>
-        </div>
+  <h2>🌱 Eco Compressor</h2>
+  <div class="subtitle">AI-Powered Resource Optimization</div>
 
-        <div id="textPreview">
-            <h2>📝 Preview</h2>
-            <div>
-                <strong>Before:</strong>
-                <div class="preview-box" id="previewBefore">Focus on a text field and click compress</div>
-            </div>
-            <div>
-                <strong>After:</strong>
-                <div class="preview-box" id="previewAfter">Compressed result will appear here</div>
-            </div>
-        </div>
+  <button id="compressBtn">
+    <span>⚡</span> Optimize Selection
+  </button>
+
+  <div id="status">Ready to reduce digital footprint</div>
+
+  <div class="stats-container" id="statsArea">
+    
+    <div class="stat-card">
+      <span class="stat-icon">💧</span>
+      <span class="stat-value" id="waterSaved">0ml</span>
+      <div class="stat-label">Water Saved</div>
     </div>
-    <script src="popup.js"></script>
+
+    <div class="stat-card">
+      <span class="stat-icon">⚡</span>
+      <span class="stat-value" id="energySaved">0J</span>
+      <div class="stat-label">Grid Energy<br>Saved</div>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-icon">☁️</span>
+      <span class="stat-value" id="carbonSaved">0mg</span>
+      <div class="stat-label">CO₂ Emissions<br>Prevented</div>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-icon">🌲</span>
+      <span class="stat-value" id="treesSaved">0.0</span>
+      <div class="stat-label">Trees Potentially<br>Saved</div>
+    </div>
+
+  </div>
+
+  <div class="total-words-container" id="wordsArea">
+    <div class="total-words-row">
+      <span style="font-size: 24px;">📄</span>
+      <span class="words-val" id="tokensSaved">0</span>
+      <span class="words-lbl">Total Words<br>Removed</span>
+    </div>
+  </div>
+
+  <div class="hackathon-badge">BUILT FOR ECOCOMPUTE 2026</div>
+
+  <script src="popup.js"></script>
 </body>
 </html>
