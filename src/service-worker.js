@@ -1,3 +1,4 @@
+importScripts('config.js');
 // service-worker.js (2026 UPDATED VERSION)
 console.log('Eco Compressor: Service Worker Loaded');
 
