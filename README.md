@@ -34,6 +34,7 @@ Follow these exact commands in your terminal to get started:
 2. cd EcoCompressor/src
 3. cp config.example.js config.js
 4. open -e config.js
+   - will need your own gemini api key 
 5. Load in Chrome: 🌐
 - Open chrome://extensions/
 - Enable Developer mode (toggle in the top right).
